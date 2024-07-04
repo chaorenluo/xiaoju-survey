@@ -17,7 +17,7 @@ const props = defineProps({
 })
 const emit = defineEmits([FORM_CHANGE_EVENT_KEY])
 
-const whitelistType = ref(props.formConfig?.value || 'ALL')
+const whitelistType = ref(props.formConfig?.value)
 
 const handleRadioGroupChange = (value) => {
   const key = props.formConfig.key

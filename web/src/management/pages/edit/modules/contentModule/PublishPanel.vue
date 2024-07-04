@@ -31,6 +31,18 @@ const updateLogicConf = () => {
   }
 }
 
+const updateWhiteConf = () => {
+  const baseConf = store.state.edit.schema.baseConf || {};
+  console.log(baseConf.passwordSwitch,baseConf.password)
+  if (baseConf.passwordSwitch && !baseConf.password) {
+    return true;
+  }
+  if (baseConf.whitelistType!='ALL' && !baseConf.whitelist?.length) {
+    return true;
+  }
+  return false
+}
+
 const handlePublish = async () => {
   if (isPublishing.value) {
     return
@@ -43,6 +55,12 @@ const handlePublish = async () => {
   } catch (err) {
     isPublishing.value = false
     ElMessage.error('请检查逻辑配置是否有误')
+    return
+  }
+
+  if(updateWhiteConf()){
+    isPublishing.value = false
+    ElMessage.error('请检查问卷设置是否有误')
     return
   }
 
