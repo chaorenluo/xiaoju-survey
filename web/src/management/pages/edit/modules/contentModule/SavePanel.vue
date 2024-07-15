@@ -127,7 +127,7 @@ const handleSave = async () => {
 
   if(updateWhiteConf()){
     isSaving.value = false
-    ElMessage.error('请检查问卷设置是否有误1')
+    ElMessage.error('请检查问卷设置是否有误')
     return
   }
 
