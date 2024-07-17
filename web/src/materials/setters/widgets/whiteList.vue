@@ -46,6 +46,7 @@
 import { ref,nextTick } from 'vue'
 import { FORM_CHANGE_EVENT_KEY } from '@/materials/setters/constant'
 import { ElMessage } from 'element-plus'
+import { regexpMap } from '@/common/regexpMap.ts'
 
 const props = defineProps({
   formConfig: Object,
@@ -58,16 +59,15 @@ const whiteVisible = ref(false)
 const whiteTextarea = ref(whitelist.value.join(','))
 
 const regularMap = {
-  MOBILE: /^[1]([3-9])[0-9]{9}$/,
-  EMAIL: /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
-
+  MOBILE:regexpMap.m,
+  EMAIL:regexpMap.e
 }
 
 
 const checkValRule = (list) => {
   let status = false;
   if (list.length > 100) { 
-    ElMessage.error('最多添加100个~')
+    ElMessage.error('最多添加100个')
     return true;
   };
   const pattern = regularMap[memberType.value];
